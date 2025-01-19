@@ -1,7 +1,7 @@
 // MainPage.tsx
 import React, { useEffect,useState } from "react";
 import axiosInstance from "../../utils/TokenIntercepter";
-import {User} from "../../pages/main/model/User";
+import {User} from "../../types/auth/User";
 
 export default function MainPage() {
     const [user, setUser] = useState<User | null>(null);
