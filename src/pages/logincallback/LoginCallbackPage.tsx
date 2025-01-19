@@ -19,8 +19,10 @@ export default function LoginCallbackPage() {
             axios.get(`http://localhost:8080/login/oauth2/code/github?code=${code}`)
                 .then(response => {
                     console.log('로그인 성공:', response.data);
+                
                     // JWT 토큰을 받아서 로컬 스토리지에 저장하고 메인 페이지로 이동
-                    localStorage.setItem('authToken', response.data.data);
+                    localStorage.setItem('accessToken', response.data.data.accessToken);
+                    localStorage.setItem('refreshToken', response.data.data.accessToken);
                     navigate('/main');
                 })
                 .catch(error => {
