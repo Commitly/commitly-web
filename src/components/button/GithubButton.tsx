@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
-
+import font from '../../theme/Font';
 // Button 컴포넌트
 function GitHubLoginButton({ onClick }: { onClick: () => void }) {
   return (
@@ -16,9 +16,13 @@ function GitHubLoginButton({ onClick }: { onClick: () => void }) {
         '&:hover': {
           bgcolor: '#1b1f23',
         },
+        width: '15%',
+        height: '50px',
+        fontFamily: font.extrabold,
       }}
     >
-      Sign in with GitHub
+      깃허브로 시작하기
+      
     </Button>
   );
 }

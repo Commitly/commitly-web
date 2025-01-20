@@ -5,7 +5,9 @@ const S = {
     container: styled.div`
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: start;
+        padding-top: 120px;
+        padding-left: 100px;
     `,
 }
 

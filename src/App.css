@@ -52,3 +52,11 @@
   font-weight: extrabold;
   src: url("../src/font/pretendard_semibold.ttf") format("truetype");
 }
+
+
+@font-face {
+  font-family: "Pretendard-Bold";
+  font-weight: extrabold;
+  src: url("../src/font/pretendard_bold.ttf") format("truetype");
+}
+

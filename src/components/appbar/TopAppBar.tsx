@@ -11,6 +11,7 @@ import axiosInstance from "../../utils/TokenIntercepter";
 import { User } from "../../types/auth/User";
 import AppBarUser from '../profile/AppBarUser';
 import { useNavigate } from 'react-router-dom';
+import theme from '../../theme/Theme';
 
 export default function TopAppBar() {
   const navigate = useNavigate();
@@ -35,7 +36,8 @@ export default function TopAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static"
-        sx={{ backgroundColor: '#FFF' }}
+        sx={{ backgroundColor: '#FFF', 
+        }}
       >
         <Container>
           <Toolbar>
@@ -45,8 +47,8 @@ export default function TopAppBar() {
               color="inherit"
               aria-label="menu"
               sx={{ mr: 2 }}
-            >
-              <CommitlyLogo />
+            > 
+              <CommitlyLogo/>
             </IconButton>
             <Box sx={{ flexGrow: 1 }} />
             <Box>
