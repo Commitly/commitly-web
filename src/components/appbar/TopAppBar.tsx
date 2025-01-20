@@ -2,21 +2,23 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import LoginButton from '../button/LoginButton';
-import { Login } from '@mui/icons-material';
 import Container from './TopAppBar.style';
 import CommitlyLogo from '../logo/CommitlyLogo';
 import { useEffect, useState } from 'react';
 import axiosInstance from "../../utils/TokenIntercepter";
 import { User } from "../../types/auth/User";
+import AppBarUser from '../profile/AppBarUser';
 
 
 export default function TopAppBar() {
   const [user, setUser] = useState<User | null>(null);
+  const handleGitHubLogin = () => {
+    console.log('GitHub 로그인 버튼이 클릭되었습니다!');
+    // GitHub OAuth Redirect 로직 추가
+    window.location.href = 'https://github.com/login/oauth/authorize?client_id=Ov23li0fSA3TMwjXKF6b';
+  };
   useEffect(() => {
     axiosInstance.get('/user/info')  // axiosInstance 사용
       .then(response => {
@@ -46,8 +48,7 @@ export default function TopAppBar() {
             </IconButton>
             <Box sx={{ flexGrow: 1 }} />
             <Box>
-              {user ? `${user.name} (${user.role})` : <LoginButton onClick={() => console.log('로그인 버튼 클릭')}></LoginButton>}
-
+              {user ?  <AppBarUser user={user}></AppBarUser>: <LoginButton onClick={handleGitHubLogin}></LoginButton>}
             </Box>
 
           </Toolbar>

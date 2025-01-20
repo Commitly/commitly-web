@@ -1,14 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../utils/TokenIntercepter';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
 export default function LoginCallbackPage() {
     const navigate = useNavigate();
     const [isRequestSent, setIsRequestSent] = useState(false); // 요청 상태를 관리
-    
     useEffect(() => {
         // 현재 URL에서 code 파라미터 추출
         let code = new URLSearchParams(window.location.search).get('code');
@@ -16,7 +15,7 @@ export default function LoginCallbackPage() {
 
         if (code && !isRequestSent) { // code가 존재하고 요청을 아직 보내지 않은 경우
             setIsRequestSent(true); // 요청 보냈다고 상태 업데이트
-            axios.get(`http://localhost:8080/login/oauth2/code/github?code=${code}`)
+            axiosInstance.get(`http://localhost:8080/login/oauth2/code/github?code=${code}`)
                 .then(response => {
                     console.log('로그인 성공:', response.data);
                 
