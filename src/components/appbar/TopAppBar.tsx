@@ -10,9 +10,10 @@ import { useEffect, useState } from 'react';
 import axiosInstance from "../../utils/TokenIntercepter";
 import { User } from "../../types/auth/User";
 import AppBarUser from '../profile/AppBarUser';
-
+import { useNavigate } from 'react-router-dom';
 
 export default function TopAppBar() {
+  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const handleGitHubLogin = () => {
     console.log('GitHub 로그인 버튼이 클릭되었습니다!');
@@ -26,7 +27,8 @@ export default function TopAppBar() {
         setUser(response.data.data)
       })
       .catch(error => {
-        console.error('요청 실패:', error);
+        alert('로그인이 필요합니다.');
+        navigate('/');
       });
   }, []);
 
@@ -48,7 +50,7 @@ export default function TopAppBar() {
             </IconButton>
             <Box sx={{ flexGrow: 1 }} />
             <Box>
-              {user ?  <AppBarUser user={user}></AppBarUser>: <LoginButton onClick={handleGitHubLogin}></LoginButton>}
+              {user ?  <AppBarUser user={user}></AppBarUser>: <LoginButton onClick={handleGitHubLogin}></LoginButton> }
             </Box>
 
           </Toolbar>
