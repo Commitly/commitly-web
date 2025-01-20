@@ -20,8 +20,7 @@ export default function MainPage() {
 
     return (
         <div>
-            웨잇어 세컨드
-            <h1>{user ? `${user.name} (${user.role})` : 'Loading user data...'}</h1>
+            
         </div>
     );
 }

@@ -24,7 +24,7 @@ function HomePage() {
       .catch(error => {
         console.error('요청 실패:', error);
       });
-  }, []);
+  });
 
   return (
     <Box
