@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+@font-face {
+  font-family: "Pretendard-Regular";
+  font-weight: normal;
+  src: url("../src/font/pretendard_regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Pretendard-ExtraBold";
+  font-weight: extrabold;
+  src: url("../src/font/pretendard_extrabold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Pretendard-SemiBold";
+  font-weight: extrabold;
+  src: url("../src/font/pretendard_semibold.ttf") format("truetype");
+}
