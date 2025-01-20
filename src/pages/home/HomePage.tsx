@@ -9,6 +9,7 @@ import font from '../../theme/Font';
 import theme from '../../theme/Theme';
 import S from './HomePage.style';
 import C from '../../components/card/Card.style';
+import HomeCircle from '../../components/circle/HomeCircle';
 
 function HomePage() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ function HomePage() {
         position: 'relative', // 기준 컨테이너
         width: '100vw',
         height: '92vh', // 원하는 높이 지정
-        backgroundColor: '#f0f0f0', // 컨테이너 배경색
+        backgroundColor: '#f6f6f6', // 컨테이너 배경색
       }}>
 
       <Box>
@@ -54,7 +55,7 @@ function HomePage() {
             <Box sx={{ height: 30 }}></Box>
             <GitHubLoginButton onClick={handleGitHubLogin}></GitHubLoginButton>
           </Box>
-
+          
         </S.container>
       </Box>
     </Box>
