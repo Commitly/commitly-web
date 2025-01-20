@@ -35,12 +35,16 @@ export default function TopAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static"
-        sx={{ backgroundColor: '#FFF', 
+      <AppBar 
+        position="static"
+        sx={{ 
+          backgroundColor: '#FFF',
+          height: '8vh',
+          paddingLeft: '80px',
+          paddingRight: '80px',
         }}
       >
-        <Container>
-          <Toolbar>
+          <Toolbar sx={{ height: '100%', minHeight: '100% !important' }}>
             <IconButton
               size="large"
               edge="start"
@@ -48,16 +52,17 @@ export default function TopAppBar() {
               aria-label="menu"
               sx={{ mr: 2 }}
             > 
-              <CommitlyLogo/>
+              <CommitlyLogo />
             </IconButton>
             <Box sx={{ flexGrow: 1 }} />
             <Box>
-              {user ?  <AppBarUser user={user}></AppBarUser>: <LoginButton onClick={handleGitHubLogin}></LoginButton> }
+              {user ? 
+                <AppBarUser user={user} /> : 
+                <LoginButton onClick={handleGitHubLogin} />
+              }
             </Box>
-
           </Toolbar>
-        </Container>
       </AppBar>
-    </Box >
+    </Box>
   );
 }
