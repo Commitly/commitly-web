@@ -28,7 +28,6 @@ export default function TopAppBar() {
         setUser(response.data.data)
       })
       .catch(error => {
-        alert('로그인이 필요합니다.');
         navigate('/');
       });
   }, []);
