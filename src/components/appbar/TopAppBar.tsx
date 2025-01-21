@@ -51,6 +51,7 @@ export default function TopAppBar() {
               color="inherit"
               aria-label="menu"
               sx={{ mr: 2 }}
+              onClick={() => navigate('/')}
             > 
               <CommitlyLogo />
             </IconButton>
