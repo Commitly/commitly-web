@@ -15,7 +15,7 @@ export default function LoginCallbackPage() {
 
         if (code && !isRequestSent) { // code가 존재하고 요청을 아직 보내지 않은 경우
             setIsRequestSent(true); // 요청 보냈다고 상태 업데이트
-            axiosInstance.get(`http://localhost:8080/login/oauth2/code/github?code=${code}`)
+            axiosInstance.get(`/login/oauth2/code/github?code=${code}`)
                 .then(response => {
                     console.log('로그인 성공:', response.data);
                 

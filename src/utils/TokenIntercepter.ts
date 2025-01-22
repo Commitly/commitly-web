@@ -1,8 +1,9 @@
 import axios from 'axios';
-
+import { env } from 'process';
 // Axios 인스턴스 생성
+const api_key = process.env.REACT_APP_API_URL
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8080', // 기본 URL을 설정합니다.
+  baseURL: api_key, // 기본 URL을 설정합니다.
 });
 
 // 요청 인터셉터 추가
@@ -37,7 +38,7 @@ axiosInstance.interceptors.response.use(
 
       try {
         // Refresh Token으로 새 Access Token 발급 요청
-        const { data } = await axios.post('http://localhost:8080/auth/refresh', {
+        const { data } = await axios.post(`${api_key}/auth/refresh`, {
           refreshToken,
         });
 
