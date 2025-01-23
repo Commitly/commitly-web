@@ -42,7 +42,7 @@ function CalendarPage() {
       
         onClickDay={onClickDay}
         value={value}
-        calendarType='hebrew'
+        calendarType="gregory" 
       />
       <Modal
         open={open}
