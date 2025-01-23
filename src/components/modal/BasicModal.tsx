@@ -1,6 +1,4 @@
-import React, { useState, useRef } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -17,23 +15,15 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-function CalendarPage() {
-  const [value, onChange] = useState(new Date());
+
+export default function BasicModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const onClickDay = (value: Date, event: React.MouseEvent) => {
-    onChange(value);  // 날짜 값을 변경
-    handleOpen();
-  };
-
   return (
-    <Box>
-      <Calendar
-        onClickDay={onClickDay}
-        value={value}
-      />
+    <div>
+      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -49,9 +39,6 @@ function CalendarPage() {
           </Typography>
         </Box>
       </Modal>
-    </Box>
-  )
-
+    </div>
+  );
 }
-
-export default CalendarPage;
