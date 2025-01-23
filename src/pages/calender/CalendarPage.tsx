@@ -24,7 +24,13 @@ function CalendarPage() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  
+  const oneDayPlus = (date: Date) => {
+    const newDate = new Date(date);
+    newDate.setDate(date.getDate() + 1);
+    return newDate;
+  }
+  
   const onClickDay = (value: Date, event: React.MouseEvent) => {
     onChange(value);  // 날짜 값을 변경
     handleOpen();
@@ -45,7 +51,9 @@ function CalendarPage() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <GPTModalComponent date={value}/>
+          <GPTModalComponent date={
+            oneDayPlus(value)
+            }/>
         </Box>
       </Modal>
     </Box>
