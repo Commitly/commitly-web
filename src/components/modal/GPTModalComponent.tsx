@@ -11,6 +11,10 @@ function GPTModalComponent(day: Day) {
     const [commitMessages, setCommitMessages] = React.useState<string[]>([]); // Change to a list of strings
     const [isLoading, setIsLoaded] = React.useState<boolean>(false);
 
+    useEffect(() => {
+        requestToServer();
+    }, []);
+
     const requestToServer = () => {
         try {
             setIsLoaded(true);
@@ -34,16 +38,17 @@ function GPTModalComponent(day: Day) {
 
     return (
         <Box>
+            <Typography id="modal-modal-title" variant="h6" component="h2" fontFamily={font.regular}>
+                        {day.date.toISOString().split('T')[0]}
+                    </Typography>
             {isLoading ? (
                 <CircularProgress />
             ) : (
                 <>
-                    <Typography id="modal-modal-title" variant="h6" component="h2" fontFamily={font.regular}>
-                        {day.date.toISOString().split('T')[0]}
-                    </Typography>
+                    
                     <Button onClick={requestToServer}>버튼</Button>
                     <Typography id="modal-modal-title" variant="h6" component="h2" fontFamily={font.regular}>
-                        {commitMessages.length > 0 ? commitMessages.join(', ') : "비어있음"} {/* Join the messages with a comma */}
+                        {commitMessages.length > 0 ? commitMessages.join(', ') : ""} {/* Join the messages with a comma */}
                     </Typography>
                 </>
             )}
