@@ -33,8 +33,10 @@ function CalendarPage() {
   return (
     <Box>
       <Calendar
+      
         onClickDay={onClickDay}
         value={value}
+        calendarType='hebrew'
       />
       <Modal
         open={open}

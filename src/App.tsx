@@ -12,7 +12,7 @@ function App() {
     <Router>
       <TopAppBar/>
       <Routes>
-        <Route path="/" element={<CalendarComponent/>} />
+        <Route path="/" element={<HomePage/>} />
         <Route path="/login/callback" element={<LoginCallbackPage/>} />
         <Route path="/main" element={<MainPage/>} />
       </Routes>
