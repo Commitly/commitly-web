@@ -12,10 +12,11 @@ import CommitListItem from '../item/CommitListItem';
 import { fontFamily } from '@mui/system';
 import AIButton from '../button/AIButton';
 import ModalS from './GPTModalComponent.style';
+import { CommitResponseType } from '../../types/commit/CommitResponseType';
 
 
 function GPTModalComponent(day: Day) {
-    const [commitMessages, setCommitMessages] = React.useState<string[]>([]); // Change to a list of strings
+    const [commitMessages, setCommitMessages] = React.useState<CommitResponseType[]>([]); // Change to a list of strings
     const [isCommitLoading, setCommitIsLoaded] = React.useState<boolean>(true);
     const [isGptLoading, setGptIsLoaded] = React.useState<boolean>(true);
     const [gptMessages, setGptMessages] = React.useState<string[]>([]);
@@ -28,10 +29,10 @@ function GPTModalComponent(day: Day) {
 
     }, []);
 
-    
+
 
     const handleClick = () => {
-        try{
+        try {
             axiosInstance.get('/github/gpt/make', {
                 params: {
                     date: day.date.toISOString().split('T')[0]
@@ -39,7 +40,7 @@ function GPTModalComponent(day: Day) {
             })
                 .then(response => {
                     console.log(response);
-                    
+
                 })
                 .catch(error => {
                     console.error('요청 실패:', error);
@@ -81,8 +82,16 @@ function GPTModalComponent(day: Day) {
                 }
             })
                 .then(response => {
-                    const messages = response.data.data.map((item: { message: string }) => item.message);
-                    setCommitMessages(messages);
+                    // Assuming response.data.data is an array of objects
+                    const commitData = response.data.data.map((item: { repositoryName: string, message: string, committedDate: string }) => {
+                        return {
+                            repositoryName: item.repositoryName,
+                            message: item.message,
+                            committedDate: item.committedDate,
+                        };
+                    });
+
+                    setCommitMessages(commitData); // Set the state with the mapped data
                     setCommitIsLoaded(false); // Set loading to false after receiving data
                 })
                 .catch(error => {
@@ -113,7 +122,7 @@ function GPTModalComponent(day: Day) {
             }}
         >
 
-            <Box sx={{ display: 'flex', flexDirection: 'row'}}>
+            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                 <Typography
                     fontFamily={font.bold}
                     sx={{ whiteSpace: 'nowrap', marginRight: '2rem' }}

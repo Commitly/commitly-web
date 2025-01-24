@@ -5,9 +5,9 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import { CommitResponseType } from '../../types/commit/CommitResponseType';
 
-
-export default function CommitListItem({ item }: { item: string[] }) {
+export default function CommitListItem({ item }: { item: CommitResponseType[] }) {
     return (
         <List
             sx={{
@@ -25,7 +25,7 @@ export default function CommitListItem({ item }: { item: string[] }) {
                             <GitHubIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary={item}/>
+                    <ListItemText primary={item.message} secondary={item.repositoryName} />
                 </ListItem>
             ))}
         </List>
