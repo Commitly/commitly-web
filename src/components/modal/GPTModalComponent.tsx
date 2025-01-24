@@ -6,27 +6,29 @@ import axiosInstance from '../../utils/TokenIntercepter';
 import Button from '@mui/material/Button';
 import font from '../../theme/Font';
 import CircularProgress from '@mui/material/CircularProgress';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import CommitListItem from '../item/CommitListItem';
-import { fontFamily } from '@mui/system';
 import AIButton from '../button/AIButton';
 import ModalS from './GPTModalComponent.style';
 import { CommitResponseType } from '../../types/commit/CommitResponseType';
+import GptListItem from '../item/GptListItem';
+import { GptResponseType } from '../../types/gpt/GptResponseType';
 
 
 function GPTModalComponent(day: Day) {
     const [commitMessages, setCommitMessages] = React.useState<CommitResponseType[]>([]); // Change to a list of strings
     const [isCommitLoading, setCommitIsLoaded] = React.useState<boolean>(true);
     const [isGptLoading, setGptIsLoaded] = React.useState<boolean>(true);
-    const [gptMessages, setGptMessages] = React.useState<string[]>([]);
+    const [gptMessages, setGptMessages] = React.useState<GptResponseType[]>([]);
 
     useEffect(() => {
         console.log(`로딩중인가요? ${isCommitLoading}`);
+        console.log(`로딩중인가요? ${isGptLoading}`);
+        console.log('성공공', gptMessages)
+
     });
     useEffect(() => {
         requestToServer();
-
+        requestGptToServer();
     }, []);
 
 
@@ -40,7 +42,8 @@ function GPTModalComponent(day: Day) {
             })
                 .then(response => {
                     console.log(response);
-
+                    requestGptToServer();
+                    
                 })
                 .catch(error => {
                     console.error('요청 실패:', error);
@@ -53,6 +56,7 @@ function GPTModalComponent(day: Day) {
 
     const requestGptToServer = () => {
         setGptIsLoaded(true); // Set loading to true before the request
+        
         try {
             axiosInstance.get('/github/gpt/get', {
                 params: {
@@ -60,7 +64,12 @@ function GPTModalComponent(day: Day) {
                 }
             })
                 .then(response => {
-                    const messages = response.data.data.map((item: { message: string }) => item.message);
+                    const messages = response.data.data.map((item: { response: string, responseDate: string }) => {
+                        return {
+                            response: item.response,
+                            responseDate: item.responseDate,
+                        }
+                    });
                     setGptMessages(messages);
                     setGptIsLoaded(false); // Set loading to false after receiving data
                 })
@@ -75,7 +84,7 @@ function GPTModalComponent(day: Day) {
     }
 
 
-    
+
     const requestToServer = () => {
         setCommitIsLoaded(true); // Set loading to true before the request
         try {
@@ -124,17 +133,26 @@ function GPTModalComponent(day: Day) {
                 transform: 'translate(-50%, -50%)',
             }}
         >
+            <Box sx={{ flexDirection: 'column' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                    <Typography
+                        fontFamily={font.bold}
+                        sx={{ whiteSpace: 'nowrap', marginRight: '2rem' }}
+                        fontSize={32}
+                    >
+                        {day.date.toISOString().split('T')[0]}의 커밋
+                    </Typography>
 
-            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                <Typography
-                    fontFamily={font.bold}
-                    sx={{ whiteSpace: 'nowrap', marginRight: '2rem' }}
-                    fontSize={32}
-                >
-                    {day.date.toISOString().split('T')[0]}의 커밋
-                </Typography>
-
-                <AIButton onClick={handleClick} />
+                    <AIButton onClick={handleClick} />
+                </Box>
+                <Box>
+                    {isGptLoading ? (
+                        <CircularProgress/>
+                    ) : (
+                        <GptListItem item={gptMessages} />
+                    )}
+                </Box>
+                
             </Box>
 
             <Box sx={{ ml: 'auto' }}>
