@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
 
-export default function FolderList({ item }: { item: string[] }) {
+export default function CommitListItem({ item }: { item: string[] }) {
     return (
         <List
             sx={{
