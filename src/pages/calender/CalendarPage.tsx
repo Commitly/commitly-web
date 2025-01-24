@@ -7,10 +7,11 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import GPTModalComponent from '../../components/modal/GPTModalComponent';
 import { Day } from '../../types/day/Day';
-import { height, minHeight } from '@mui/system';
+import { display, height, minHeight } from '@mui/system';
 
 const style = {
   position: 'absolute',
+  display: 'flex',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -20,6 +21,7 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+
 };
 
 function CalendarPage() {
@@ -42,7 +44,6 @@ function CalendarPage() {
   return (
     <Box>
       <Calendar
-      
         onClickDay={onClickDay}
         value={value}
         calendarType="gregory" 
@@ -53,11 +54,11 @@ function CalendarPage() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        
           <GPTModalComponent date={
             oneDayPlus(value)
             }/>
-        </Box>
+        
       </Modal>
     </Box>
   )
