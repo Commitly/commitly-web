@@ -1,4 +1,4 @@
 export interface GptResponseType {
-    responses: string;
+    response: string;
     responseDate: string;
 }

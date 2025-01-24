@@ -25,7 +25,7 @@ export default function GptListItem({ item }: { item: GptResponseType[] }) {
                             <AutoAwesomeIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary={item.responses} secondary={item.responseDate}/>
+                    <ListItemText primary={item.response} secondary={item.responseDate}/>
                 </ListItem>
             ))}
         </List>
