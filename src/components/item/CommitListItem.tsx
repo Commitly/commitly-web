@@ -4,23 +4,31 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import ImageIcon from '@mui/icons-material/Image';
-import WorkIcon from '@mui/icons-material/Work';
-import BeachAccessIcon from '@mui/icons-material/BeachAccess';
+import GitHubIcon from '@mui/icons-material/GitHub';
+
 
 export default function FolderList({ item }: { item: string[] }) {
-  return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-        {item.map((item) => (
-            <ListItem>
-            <ListItemAvatar>
-                <Avatar>
-                <ImageIcon />
-                </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={item} secondary="Jan 9, 2014" />
-            </ListItem>
-        ))}
-    </List>
-  );
+    return (
+        <List
+            sx={{
+                width: '100%',
+                maxWidth: 360,
+                maxHeight: 600,
+                bgcolor: 'background.paper',
+                overflow: 'auto', // 스크롤 활성화
+            }}
+        >
+            {item.map((item, index) => (
+                <ListItem key={index}> {/* key 추가 필수 */}
+                    <ListItemAvatar>
+                        <Avatar>
+                            <GitHubIcon />
+                        </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary={item}/>
+                </ListItem>
+            ))}
+        </List>
+
+    );
 }
