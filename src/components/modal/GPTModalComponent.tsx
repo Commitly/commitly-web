@@ -121,7 +121,7 @@ function GPTModalComponent(day: Day) {
             sx={{
                 display: 'flex',
                 flexDirection: 'row', // 수평으로 배치
-                width: 800,
+                width: 1200,
                 minHeight: 600,
                 bgcolor: 'background.paper',
                 border: '2px solid #000',
@@ -133,7 +133,7 @@ function GPTModalComponent(day: Day) {
                 transform: 'translate(-50%, -50%)',
             }}
         >
-            <Box sx={{ flexDirection: 'column' }}>
+            <Box sx={{ flexDirection: 'column', flexGrow: 1 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <Typography
                         fontFamily={font.bold}
@@ -156,7 +156,6 @@ function GPTModalComponent(day: Day) {
 
                     )}
                 </Box>
-
             </Box>
 
             <Box sx={{ ml: 'auto' }}>

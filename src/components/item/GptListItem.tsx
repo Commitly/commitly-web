@@ -6,14 +6,18 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import { GptResponseType } from '../../types/gpt/GptResponseType';
+import PasteButton from '../button/PasteButton'
+
 
 export default function GptListItem({ item }: { item: GptResponseType[] }) {
+    
+    
     return (
         <List
             sx={{
                 width: '100%',
-                maxWidth: 360,
-                maxHeight: 600,
+                maxWidth: 600,
+                maxHeight: 300,
                 bgcolor: 'background.paper',
                 overflow: 'auto', // 스크롤 활성화
             }}
@@ -25,7 +29,9 @@ export default function GptListItem({ item }: { item: GptResponseType[] }) {
                             <AutoAwesomeIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary={item.response} secondary={item.responseDate}/>
+                    <ListItemText sx={{width: 1000}} primary={item.response} secondary={item.responseDate} />
+
+                    <PasteButton message={item.response} />
                 </ListItem>
             ))}
         </List>
