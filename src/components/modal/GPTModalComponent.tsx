@@ -37,15 +37,15 @@ function GPTModalComponent(day: Day) {
                     date: day.date.toISOString().split('T')[0]
                 }
             })
-            .then(response => {
-                const messages = response.data.data.map((item: { message: string }) => item.message);
-                setCommitMessages(messages);
-                setIsLoaded(false); // Set loading to false after receiving data
-            })
-            .catch(error => {
-                console.error('요청 실패:', error);
-                setIsLoaded(false); // Ensure loading state is set to false on error too
-            });
+                .then(response => {
+                    const messages = response.data.data.map((item: { message: string }) => item.message);
+                    setCommitMessages(messages);
+                    setIsLoaded(false); // Set loading to false after receiving data
+                })
+                .catch(error => {
+                    console.error('요청 실패:', error);
+                    setIsLoaded(false); // Ensure loading state is set to false on error too
+                });
         } catch (error) {
             console.error('Request error:', error);
             setIsLoaded(false);
@@ -70,10 +70,18 @@ function GPTModalComponent(day: Day) {
             }}
         >
 
-            <Box sx={{ flex: 1 }} flexDirection={'column'}>
-                <Typography fontFamily={font.bold} fontSize={32}>{day.date.toISOString().split('T')[0]}의 커밋</Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'row'}}>
+                <Typography
+                    fontFamily={font.bold}
+                    sx={{ whiteSpace: 'nowrap', marginRight: '2rem' }}
+                    fontSize={32}
+                >
+                    {day.date.toISOString().split('T')[0]}의 커밋
+                </Typography>
+
                 <AIButton onClick={handleClick} />
             </Box>
+
             <Box sx={{ ml: 'auto' }}>
                 <ModalS.container>
                     {isLoading ? (
@@ -90,14 +98,14 @@ function GPTModalComponent(day: Day) {
                             <CircularProgress />
                         </Box>
                     ) : (
-                        <Box>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                             {commitMessages.length === 0 ? (
                                 <Typography fontFamily={font.bold} fontSize={24}>해당 날짜에 커밋이 없습니다.</Typography>
                             ) : (
-                                <FolderList item={commitMessages}/>
+                                <FolderList item={commitMessages} />
                             )}
                         </Box>
-                        
+
                     )}
                 </ModalS.container>
 

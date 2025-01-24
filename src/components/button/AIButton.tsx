@@ -20,6 +20,7 @@ const AIButton: React.FC<GPTButtonProps> = ({ onClick }) => {
         padding: '10px 20px',
         display: 'flex',
         alignItems: 'center',
+        height: '50px',
         gap: '8px', // 텍스트와 아이콘 사이 간격
         '&:hover': {
           backgroundColor: '#1A2D52', // hover 시 색상 변경
