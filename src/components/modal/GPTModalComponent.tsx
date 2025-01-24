@@ -10,6 +10,9 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import FolderList from '../item/CommitListItem';
 import { fontFamily } from '@mui/system';
+import AIButton from '../button/AIButton';
+import ModalS from './GPTModalComponent.style';
+
 
 function GPTModalComponent(day: Day) {
     const [commitMessages, setCommitMessages] = React.useState<string[]>([]); // Change to a list of strings
@@ -18,6 +21,10 @@ function GPTModalComponent(day: Day) {
     useEffect(() => {
         requestToServer();
     }, []);
+
+    const handleClick = () => {
+        console.log('GPT 버튼 클릭');
+    }
 
     const requestToServer = () => {
         try {
@@ -45,7 +52,7 @@ function GPTModalComponent(day: Day) {
             sx={{
                 display: 'flex',
                 flexDirection: 'row', // 수평으로 배치
-                width: 1200,
+                width: 800,
                 minHeight: 600,
                 bgcolor: 'background.paper',
                 border: '2px solid #000',
@@ -57,15 +64,22 @@ function GPTModalComponent(day: Day) {
                 transform: 'translate(-50%, -50%)',
             }}
         >
-            <Box sx={{ flex: 1 }}>
+            <ModalS.container>
+                
+            </ModalS.container>
+            <Box sx={{ flex: 1 }} flexDirection={'column'}>
                 <Typography fontFamily={font.bold} fontSize={32}>{day.date.toISOString().split('T')[0]}의 커밋</Typography>
+                <AIButton onClick={handleClick}/>
             </Box>
             <Box sx={{ ml: 'auto'}}>
+                <ModalS.container>
                 {isLoading ? (
                     <Typography fontFamily={font.bold} sx={{textAlign:'center'}} fontSize={32}>로딩중...</Typography>
                 ) : (
                     <FolderList item={commitMessages} />
                 )}
+                </ModalS.container>
+                
             </Box>
         </Box>
 
