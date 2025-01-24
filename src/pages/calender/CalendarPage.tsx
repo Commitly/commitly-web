@@ -7,18 +7,21 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import GPTModalComponent from '../../components/modal/GPTModalComponent';
 import { Day } from '../../types/day/Day';
+import { height, minHeight } from '@mui/system';
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 800,
+  minHeight: 400,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
+
 function CalendarPage() {
   const [value, onChange] = useState(new Date());
   const [open, setOpen] = React.useState(false);

@@ -6,6 +6,9 @@ import axiosInstance from '../../utils/TokenIntercepter';
 import Button from '@mui/material/Button';
 import font from '../../theme/Font';
 import CircularProgress from '@mui/material/CircularProgress';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import FolderList from '../item/CommitListItem';
 
 function GPTModalComponent(day: Day) {
     const [commitMessages, setCommitMessages] = React.useState<string[]>([]); // Change to a list of strings
@@ -46,10 +49,8 @@ function GPTModalComponent(day: Day) {
             ) : (
                 <>
                     
-                    <Button onClick={requestToServer}>버튼</Button>
-                    <Typography id="modal-modal-title" variant="h6" component="h2" fontFamily={font.regular}>
-                        {commitMessages.length > 0 ? commitMessages.join(', ') : ""} {/* Join the messages with a comma */}
-                    </Typography>
+                    <FolderList item={commitMessages}></FolderList>
+                    
                 </>
             )}
         </Box>
