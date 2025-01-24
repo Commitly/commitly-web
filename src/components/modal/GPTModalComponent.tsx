@@ -43,7 +43,7 @@ function GPTModalComponent(day: Day) {
                 .then(response => {
                     console.log(response);
                     requestGptToServer();
-                    
+
                 })
                 .catch(error => {
                     console.error('요청 실패:', error);
@@ -56,7 +56,7 @@ function GPTModalComponent(day: Day) {
 
     const requestGptToServer = () => {
         setGptIsLoaded(true); // Set loading to true before the request
-        
+
         try {
             axiosInstance.get('/github/gpt/get', {
                 params: {
@@ -147,12 +147,16 @@ function GPTModalComponent(day: Day) {
                 </Box>
                 <Box>
                     {isGptLoading ? (
-                        <CircularProgress/>
+                        <CircularProgress />
                     ) : (
-                        <GptListItem item={gptMessages} />
+                        <Box>
+                            <Box sx={{height: 20}}></Box>
+                            <GptListItem item={gptMessages} />
+                        </Box>
+
                     )}
                 </Box>
-                
+
             </Box>
 
             <Box sx={{ ml: 'auto' }}>
