@@ -10,7 +10,8 @@
     --textMuted: #6c757d;
 }
 .custom-calendar{
-    width: 1200px;
+    width: 75vw;
+    max-height: 75vh;
     padding-bottom: 60px;
     font-family: 'Pretendard-SemiBold';
 }
@@ -25,9 +26,10 @@
 }
 .custom-calendar .react-calendar__tile{
     font-size: 1.8em;
-    padding: 30px;
+    padding: 1em;
     
 }
+
 
 .custom-calendar .react-calendar__tile:hover {
     background-color: var(--primary);
@@ -57,8 +59,7 @@
     margin-bottom: 1em;
     background-color: var(--primary);
     color: var(--white);
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    
 }
 
 .custom-calendar .react-calendar__navigation button {
