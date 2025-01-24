@@ -8,7 +8,7 @@ import font from '../../theme/Font';
 import CircularProgress from '@mui/material/CircularProgress';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import FolderList from '../item/CommitListItem';
+import CommitListItem from '../item/CommitListItem';
 import { fontFamily } from '@mui/system';
 import AIButton from '../button/AIButton';
 import ModalS from './GPTModalComponent.style';
@@ -16,21 +16,64 @@ import ModalS from './GPTModalComponent.style';
 
 function GPTModalComponent(day: Day) {
     const [commitMessages, setCommitMessages] = React.useState<string[]>([]); // Change to a list of strings
-    const [isLoading, setIsLoaded] = React.useState<boolean>(true);
+    const [isCommitLoading, setCommitIsLoaded] = React.useState<boolean>(true);
+    const [isGptLoading, setGptIsLoaded] = React.useState<boolean>(true);
+    const [gptMessages, setGptMessages] = React.useState<string[]>([]);
 
     useEffect(() => {
-        console.log(`로딩중인가요? ${isLoading}`);
+        console.log(`로딩중인가요? ${isCommitLoading}`);
     });
     useEffect(() => {
         requestToServer();
+
     }, []);
 
+    
+
     const handleClick = () => {
-        console.log('GPT 버튼 클릭');
+        try{
+            axiosInstance.get('/github/gpt/make', {
+                params: {
+                    date: day.date.toISOString().split('T')[0]
+                }
+            })
+                .then(response => {
+                    console.log(response);
+                    
+                })
+                .catch(error => {
+                    console.error('요청 실패:', error);
+                });
+        } catch (error) {
+            console.error('Request error:', error);
+        }
     }
 
+
+    const requestGptToServer = () => {
+        setGptIsLoaded(true); // Set loading to true before the request
+        try {
+            axiosInstance.get('/github/gpt/get', {
+                params: {
+                    date: day.date.toISOString().split('T')[0]
+                }
+            })
+                .then(response => {
+                    const messages = response.data.data.map((item: { message: string }) => item.message);
+                    setGptMessages(messages);
+                    setGptIsLoaded(false); // Set loading to false after receiving data
+                })
+                .catch(error => {
+                    console.error('요청 실패:', error);
+                    setGptIsLoaded(false); // Ensure loading state is set to false on error too
+                });
+        } catch (error) {
+            console.error('Request error:', error);
+            setGptIsLoaded(false);
+        }
+    }
     const requestToServer = () => {
-        setIsLoaded(true); // Set loading to true before the request
+        setCommitIsLoaded(true); // Set loading to true before the request
         try {
             axiosInstance.get('/github/commits/messages', {
                 params: {
@@ -40,15 +83,15 @@ function GPTModalComponent(day: Day) {
                 .then(response => {
                     const messages = response.data.data.map((item: { message: string }) => item.message);
                     setCommitMessages(messages);
-                    setIsLoaded(false); // Set loading to false after receiving data
+                    setCommitIsLoaded(false); // Set loading to false after receiving data
                 })
                 .catch(error => {
                     console.error('요청 실패:', error);
-                    setIsLoaded(false); // Ensure loading state is set to false on error too
+                    setCommitIsLoaded(false); // Ensure loading state is set to false on error too
                 });
         } catch (error) {
             console.error('Request error:', error);
-            setIsLoaded(false);
+            setCommitIsLoaded(false);
         }
     };
 
@@ -84,7 +127,7 @@ function GPTModalComponent(day: Day) {
 
             <Box sx={{ ml: 'auto' }}>
                 <ModalS.container>
-                    {isLoading ? (
+                    {isCommitLoading ? (
                         console.log('로딩중...'),
                         <Box
                             sx={{
@@ -102,7 +145,7 @@ function GPTModalComponent(day: Day) {
                             {commitMessages.length === 0 ? (
                                 <Typography fontFamily={font.bold} fontSize={24}>해당 날짜에 커밋이 없습니다.</Typography>
                             ) : (
-                                <FolderList item={commitMessages} />
+                                <CommitListItem item={commitMessages} />
                             )}
                         </Box>
 
