@@ -21,16 +21,23 @@ export default function TopAppBar() {
     // GitHub OAuth Redirect 로직 추가
     window.location.href = 'https://github.com/login/oauth/authorize?client_id=Ov23li0fSA3TMwjXKF6b';
   };
+  
+  const [accessToken, setAccessToken] = useState<string | null>(null);
+  useEffect(() => {
+    const accesstoken = localStorage.getItem('accessToken');
+    setAccessToken(accesstoken);
+    console.log('토크놑큰', accessToken);
+});
   useEffect(() => {
     axiosInstance.get('/user/info')  // axiosInstance 사용
       .then(response => {
-
+        console.log('response:', response);
         setUser(response.data.data)
       })
       .catch(error => {
         navigate('/');
       });
-  }, []);
+  }, [accessToken]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
