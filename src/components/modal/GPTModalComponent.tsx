@@ -16,8 +16,11 @@ import ModalS from './GPTModalComponent.style';
 
 function GPTModalComponent(day: Day) {
     const [commitMessages, setCommitMessages] = React.useState<string[]>([]); // Change to a list of strings
-    const [isLoading, setIsLoaded] = React.useState<boolean>(false);
+    const [isLoading, setIsLoaded] = React.useState<boolean>(true);
 
+    useEffect(() => {
+        console.log(`로딩중인가요? ${isLoading}`);
+    });
     useEffect(() => {
         requestToServer();
     }, []);
@@ -27,22 +30,24 @@ function GPTModalComponent(day: Day) {
     }
 
     const requestToServer = () => {
+        setIsLoaded(true); // Set loading to true before the request
         try {
-            setIsLoaded(true);
             axiosInstance.get('/github/commits/messages', {
                 params: {
                     date: day.date.toISOString().split('T')[0]
                 }
             })
-                .then(response => {
-                    // Map the data into a list of commit messages
-                    const messages = response.data.data.map((item: { message: string }) => item.message);
-                    setCommitMessages(messages); // Set the list of commit messages
-                })
-                .catch(error => {
-                    console.error('요청 실패:', error);
-                });
-        } finally {
+            .then(response => {
+                const messages = response.data.data.map((item: { message: string }) => item.message);
+                setCommitMessages(messages);
+                setIsLoaded(false); // Set loading to false after receiving data
+            })
+            .catch(error => {
+                console.error('요청 실패:', error);
+                setIsLoaded(false); // Ensure loading state is set to false on error too
+            });
+        } catch (error) {
+            console.error('Request error:', error);
             setIsLoaded(false);
         }
     };
@@ -64,22 +69,38 @@ function GPTModalComponent(day: Day) {
                 transform: 'translate(-50%, -50%)',
             }}
         >
-            <ModalS.container>
-                
-            </ModalS.container>
+
             <Box sx={{ flex: 1 }} flexDirection={'column'}>
                 <Typography fontFamily={font.bold} fontSize={32}>{day.date.toISOString().split('T')[0]}의 커밋</Typography>
-                <AIButton onClick={handleClick}/>
+                <AIButton onClick={handleClick} />
             </Box>
-            <Box sx={{ ml: 'auto'}}>
+            <Box sx={{ ml: 'auto' }}>
                 <ModalS.container>
-                {isLoading ? (
-                    <Typography fontFamily={font.bold} sx={{textAlign:'center'}} fontSize={32}>로딩중...</Typography>
-                ) : (
-                    <FolderList item={commitMessages} />
-                )}
+                    {isLoading ? (
+                        console.log('로딩중...'),
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'center', // 수평 중앙 정렬
+                                alignItems: 'center', // 수직 중앙 정렬
+                                width: '200px', // 화면 전체 너비
+                                height: '400px', // 화면 전체 높이
+                            }}
+                        >
+                            <CircularProgress />
+                        </Box>
+                    ) : (
+                        <Box>
+                            {commitMessages.length === 0 ? (
+                                <Typography fontFamily={font.bold} fontSize={24}>해당 날짜에 커밋이 없습니다.</Typography>
+                            ) : (
+                                <FolderList item={commitMessages}/>
+                            )}
+                        </Box>
+                        
+                    )}
                 </ModalS.container>
-                
+
             </Box>
         </Box>
 
