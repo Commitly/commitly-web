@@ -73,6 +73,9 @@ function GPTModalComponent(day: Day) {
             setGptIsLoaded(false);
         }
     }
+
+
+    
     const requestToServer = () => {
         setCommitIsLoaded(true); // Set loading to true before the request
         try {

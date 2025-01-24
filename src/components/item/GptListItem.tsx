@@ -4,10 +4,10 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import GitHubIcon from '@mui/icons-material/GitHub';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import { GptResponseType } from '../../types/gpt/GptResponseType';
 
-export default function GptListItem({ item }: { item: string[] }) {
+export default function GptListItem({ item }: { item: GptResponseType[] }) {
     return (
         <List
             sx={{
@@ -25,7 +25,7 @@ export default function GptListItem({ item }: { item: string[] }) {
                             <AutoAwesomeIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary={item}/>
+                    <ListItemText primary={item.responses} secondary={item.responseDate}/>
                 </ListItem>
             ))}
         </List>
