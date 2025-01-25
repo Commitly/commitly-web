@@ -113,69 +113,98 @@ function GPTModalComponent(day: Day) {
         <Box
             sx={{
                 display: 'flex',
-                flexDirection: 'row', // 수평으로 배치
-                width: 1200,
-                minHeight: 600,
+                width: '100%',
+                maxWidth: 1200,
+                height: 600,
                 bgcolor: 'background.paper',
-                border: '2px solid #000',
-                boxShadow: 24,
-                p: 4,
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
+                border: '1px solid #e0e0e0',
+                borderRadius: 2,
+                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                margin: 'auto',
+                overflow: 'hidden'
             }}
         >
-            <Box sx={{ flexDirection: 'column', flexGrow: 2.4 }}>
-                <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+            {/* Left Section */}
+            <Box
+                sx={{
+                    width: '55%',
+                    p: 3,
+                    display: 'flex',
+                    flexDirection: 'column'
+                }}
+            >
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
                     <Typography
                         fontFamily={font.bold}
-                        sx={{ whiteSpace: 'nowrap', marginRight: '2rem' }}
-                        fontSize={32}
+                        sx={{
+                            whiteSpace: 'nowrap',
+                            mr: 2,
+                            fontSize: 28
+                        }}
                     >
                         {day.date.toISOString().split('T')[0]}의 커밋
                     </Typography>
-                    <AIButton onClick={handleClick} isLoading={isGptLoading} />
+                    <AIButton
+                        onClick={handleClick}
+                        isLoading={isGptLoading}
+                    />
                 </Box>
-                <Box>
 
-                    <Box>
-                        <Box sx={{ height: 20 }}></Box>
-                        <GptListItem item={gptMessages} />
-                    </Box>
+                <Box sx={{ flexGrow: 1, overflowY: 'auto' }}>
+                    <GptListItem item={gptMessages} />
                 </Box>
             </Box>
-            <Divider orientation="vertical" flexItem  sx={{marginRight:10}}/>
-            <Box sx={{ flexGrow: 2 }}>
-                <ModalS.container>
-                    {isCommitLoading ? (
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                justifyContent: 'center', // 수평 중앙 정렬
-                                alignItems: 'center', // 수직 중앙 정렬
-                                width: '300px', // 화면 전체 너비
-                                height: '400px', // 화면 전체 높이
-                            }}
-                        >
-                            <CircularProgress />
-                        </Box>
-                    ) : (
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                            {commitMessages.length === 0 ? (
-                                <Typography fontFamily={font.bold} fontSize={24}>해당 날짜에 커밋이 없습니다.</Typography>
-                            ) : (
-                                <CommitListItem item={commitMessages} />
-                            )}
-                        </Box>
 
-                    )}
-                </ModalS.container>
+            {/* Vertical Divider */}
+            <Divider
+                orientation="vertical"
+                flexItem
+                sx={{
+                    mx: 2,
+                    borderColor: '#e0e0e0'
+                }}
+            />
 
+            {/* Right Section */}
+            <Box
+                sx={{
+                    width: '45%',
+                    p: 3,
+                    display: 'flex',
+                    flexDirection: 'column'
+                }}
+            >
+                {isCommitLoading ? (
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            flexGrow: 1
+                        }}
+                    >
+                        <CircularProgress />
+                    </Box>
+                ) : (
+                    <Box sx={{ width: '100%' }}>
+                        {commitMessages.length === 0 ? (
+                            <Typography
+                                fontFamily={font.bold}
+                                fontSize={20}
+                                color="text.secondary"
+                                textAlign="center"
+                            >
+                                해당 날짜에 커밋이 없습니다.
+                            </Typography>
+                        ) : (
+                            <CommitListItem item={commitMessages} />
+                        )}
+                    </Box>
+                )}
             </Box>
         </Box>
-
-    )
+    );
+    
 }
 
 export default GPTModalComponent;

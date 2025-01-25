@@ -13,7 +13,7 @@ export default function CommitListItem({ item }: { item: CommitResponseType[] })
             sx={{
                 width: '100%',
                 maxWidth: 360,
-                maxHeight: 600,
+                maxHeight: 500,
                 bgcolor: 'background.paper',
                 overflow: 'auto', // 스크롤 활성화
             }}

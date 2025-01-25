@@ -55,8 +55,8 @@ function CalendarPage() {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
       >
-
         <GPTModalComponent date={oneDayPlus(value)} />
 
       </Modal>
