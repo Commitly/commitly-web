@@ -20,9 +20,9 @@ function GPTModalComponent(day: Day) {
     const [isGptLoading, setGptIsLoaded] = useState<boolean>(true);
     const [gptMessages, setGptMessages] = React.useState<GptResponseType[]>([]);
 
-    useEffect(() => {
-        console.log(`gpt로딩중임?? ${isGptLoading}`);
-    });
+    // useEffect(() => {
+    //     console.log(`gpt로딩중임?? ${isGptLoading}`);
+    // });
     useEffect(() => {
         requestToServer();
         requestGptToServer();
@@ -39,7 +39,15 @@ function GPTModalComponent(day: Day) {
                 }
             })
                 .then(response => {
-                    // console.log('요청 성공:', response);
+
+                    console.log('요청 성공:', response);
+
+                    if (response.data.status === 404) {
+                        alert("해당 날짜에 커밋이 없습니다.");
+                    }
+                    if (response.data.status === 429) {
+                        alert("회고록은 하루에 20번만 작성가능합니다");
+                    }
                     requestGptToServer();
 
                 })
@@ -69,7 +77,7 @@ function GPTModalComponent(day: Day) {
             setGptMessages(messages);
         } catch (error) {
 
-            console.error('요청 실패:', error);
+            // console.error('요청 실패:', error);
         } finally {
             setGptIsLoaded(false); // 요청 완료 후 로딩 상태 해제
         }
@@ -100,7 +108,7 @@ function GPTModalComponent(day: Day) {
                     setCommitIsLoaded(false); // Set loading to false after receiving data
                 })
                 .catch(error => {
-                    console.error('요청 실패:', error);
+                    // console.error('요청 실패:', error);
                     setCommitIsLoaded(false); // Ensure loading state is set to false on error too
                 });
         } catch (error) {
@@ -188,21 +196,26 @@ function GPTModalComponent(day: Day) {
                 ) : (
                     <Box sx={{
                         width: '100%',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        flexGrow: 1
+
 
                     }}>
                         {commitMessages.length === 0 ? (
-                            <Typography
-                                fontFamily={font.bold}
-                                fontSize={20}
-                                color="text.secondary"
-                                textAlign="center"
-                            >
-                                해당 날짜에 커밋이 없습니다.
-                            </Typography>
+                            <Box sx={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                flexGrow: 1
+                            }}>
+                                <Typography
+                                    fontFamily={font.bold}
+                                    fontSize={20}
+                                    color="text.secondary"
+                                    textAlign="center"
+                                >
+                                    해당 날짜에 커밋이 없습니다.
+                                </Typography>
+                            </Box>
+
                         ) : (
                             <CommitListItem item={commitMessages} />
                         )}

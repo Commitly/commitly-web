@@ -52,7 +52,7 @@ axiosInstance.interceptors.response.use(
       } catch (refreshError) {
         console.error('Refresh Token도 만료됨. 로그인 페이지로 이동합니다.');
         localStorage.clear();
-        // window.location.href = '/';
+        window.location.href = '/';
         return Promise.reject(refreshError);
       }
     }
