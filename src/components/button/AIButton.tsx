@@ -19,6 +19,7 @@ const AIButton: React.FC<GPTButtonProps> = ({ onClick, isLoading }) => {
         color: 'white',
         borderRadius: '50px',
         fontSize: '16px',
+        minWidth: '160px',
         fontWeight: 'bold',
         padding: '10px 20px',
         display: 'flex',
@@ -30,10 +31,13 @@ const AIButton: React.FC<GPTButtonProps> = ({ onClick, isLoading }) => {
         },
       }}
     >
-      <AutoAwesomeIcon />
+      <AutoAwesomeIcon sx={{
+        left: 0,
+      }} />
       <Box>
         {isLoading ? (
-          <CircularProgress />
+          
+          <CircularProgress size={20} />
         ) : (
           <Typography fontFamily={font.extrabold}>회고록 만들기</Typography>
         )}

@@ -55,7 +55,7 @@ function GPTModalComponent(day: Day) {
     const requestGptToServer = async () => {
         setGptIsLoaded(true); // 요청 시작 전 로딩 상태 설정
         try {
-            
+
             const response = await axiosInstance.get('/github/gpt/get', {
                 params: {
                     date: day.date.toISOString().split('T')[0]
@@ -139,16 +139,11 @@ function GPTModalComponent(day: Day) {
                     <AIButton onClick={handleClick} isLoading={isGptLoading} />
                 </Box>
                 <Box>
-                    {isGptLoading ? (
-                        console.log('GPT 로딩중임'),
-                        <CircularProgress />
-                    ) : (
-                        <Box>
-                            <Box sx={{ height: 20 }}></Box>
-                            <GptListItem item={gptMessages} />
-                        </Box>
 
-                    )}
+                    <Box>
+                        <Box sx={{ height: 20 }}></Box>
+                        <GptListItem item={gptMessages} />
+                    </Box>
                 </Box>
             </Box>
 
