@@ -126,7 +126,7 @@ function GPTModalComponent(day: Day) {
                 transform: 'translate(-50%, -50%)',
             }}
         >
-            <Box sx={{ flexDirection: 'column', flexGrow: 1 }}>
+            <Box sx={{ flexDirection: 'column', flexGrow: 3 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <Typography
                         fontFamily={font.bold}
@@ -135,7 +135,6 @@ function GPTModalComponent(day: Day) {
                     >
                         {day.date.toISOString().split('T')[0]}의 커밋
                     </Typography>
-
                     <AIButton onClick={handleClick} isLoading={isGptLoading} />
                 </Box>
                 <Box>
@@ -147,16 +146,15 @@ function GPTModalComponent(day: Day) {
                 </Box>
             </Box>
 
-            <Box sx={{ ml: 'auto' }}>
+            <Box sx={{ flexGrow: 1.5 }}>
                 <ModalS.container>
                     {isCommitLoading ? (
-
                         <Box
                             sx={{
                                 display: 'flex',
                                 justifyContent: 'center', // 수평 중앙 정렬
                                 alignItems: 'center', // 수직 중앙 정렬
-                                width: '200px', // 화면 전체 너비
+                                width: '300px', // 화면 전체 너비
                                 height: '400px', // 화면 전체 높이
                             }}
                         >
