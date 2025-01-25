@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 import { Day } from '../../types/day/Day';
@@ -15,16 +15,13 @@ import { GptResponseType } from '../../types/gpt/GptResponseType';
 
 
 function GPTModalComponent(day: Day) {
-    const [commitMessages, setCommitMessages] = React.useState<CommitResponseType[]>([]); // Change to a list of strings
-    const [isCommitLoading, setCommitIsLoaded] = React.useState<boolean>(true);
-    const [isGptLoading, setGptIsLoaded] = React.useState<boolean>(true);
+    const [commitMessages, setCommitMessages] = useState<CommitResponseType[]>([]); // Change to a list of strings
+    const [isCommitLoading, setCommitIsLoaded] = useState<boolean>(true);
+    const [isGptLoading, setGptIsLoaded] = useState<boolean>(true);
     const [gptMessages, setGptMessages] = React.useState<GptResponseType[]>([]);
 
     useEffect(() => {
-        console.log(`로딩중인가요? ${isCommitLoading}`);
-        console.log(`로딩중인가요? ${isGptLoading}`);
-        console.log('성공공', gptMessages)
-
+        console.log(`gpt로딩중임?? ${isGptLoading}`);
     });
     useEffect(() => {
         requestToServer();
@@ -34,6 +31,7 @@ function GPTModalComponent(day: Day) {
 
 
     const handleClick = () => {
+        setGptIsLoaded(true);
         try {
             axiosInstance.get('/github/gpt/make', {
                 params: {
@@ -41,53 +39,42 @@ function GPTModalComponent(day: Day) {
                 }
             })
                 .then(response => {
-                    console.log('요청 성공:', response);
+                    // console.log('요청 성공:', response);
                     requestGptToServer();
 
                 })
                 .catch(error => {
-                    console.error('요청 실패:', error);
+                    // console.error('요청 실패:', error);
                 });
         } catch (error) {
-            console.error('Request error:', error);
+            // console.error('Request error:', error);
         }
     }
 
 
-    const requestGptToServer = () => {
-        setGptIsLoaded(true); // Set loading to true before the request
-
+    const requestGptToServer = async () => {
+        setGptIsLoaded(true); // 요청 시작 전 로딩 상태 설정
         try {
-            axiosInstance.get('/github/gpt/get', {
+            
+            const response = await axiosInstance.get('/github/gpt/get', {
                 params: {
                     date: day.date.toISOString().split('T')[0]
                 }
-            })
-                .then(response => {
-                    console.log('요청이 간거 맞음?:', response);
-                    const messages = response.data.data.map((item: { response: string, responseDate: string }) => {
-                        return {
-                            response: item.response,
-                            responseDate: item.responseDate,
-                        }
-                    });
-                    setGptMessages(messages);
-                    setGptIsLoaded(false); // Set loading to false after receiving data
-                })
-                .catch(error => {
-                    console.log('에러', error.response);
-                    if (error.response?.status === 429) { // 오타 수정: stauts -> status
-                        alert('요청이 너무 많습니다. 잠시 후 다시 시도해주세요.');
-                    }
-                    console.error('요청 실패:', error);
-                    setGptIsLoaded(false); // Ensure loading state is set to false on error too
-                });
+            });
+
+            const messages = response.data.data.map((item: { response: string, responseDate: string }) => ({
+                response: item.response,
+                responseDate: item.responseDate,
+            }));
+            setGptMessages(messages);
         } catch (error) {
-            console.error('Request error:', error);
-            alert('요청 실패');
-            setGptIsLoaded(false);
+
+            console.error('요청 실패:', error);
+        } finally {
+            setGptIsLoaded(false); // 요청 완료 후 로딩 상태 해제
         }
-    }
+    };
+
 
 
 
@@ -149,10 +136,11 @@ function GPTModalComponent(day: Day) {
                         {day.date.toISOString().split('T')[0]}의 커밋
                     </Typography>
 
-                    <AIButton onClick={handleClick} />
+                    <AIButton onClick={handleClick} isLoading={isGptLoading} />
                 </Box>
                 <Box>
                     {isGptLoading ? (
+                        console.log('GPT 로딩중임'),
                         <CircularProgress />
                     ) : (
                         <Box>
@@ -167,7 +155,7 @@ function GPTModalComponent(day: Day) {
             <Box sx={{ ml: 'auto' }}>
                 <ModalS.container>
                     {isCommitLoading ? (
-                        console.log('로딩중...'),
+
                         <Box
                             sx={{
                                 display: 'flex',

@@ -17,7 +17,7 @@ export default function GptListItem({ item }: { item: GptResponseType[] }) {
             sx={{
                 width: '100%',
                 maxWidth: 600,
-                maxHeight: 300,
+                maxHeight: 600,
                 bgcolor: 'background.paper',
                 overflow: 'auto', // 스크롤 활성화
             }}

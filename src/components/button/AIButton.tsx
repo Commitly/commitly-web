@@ -1,14 +1,15 @@
 import React from 'react';
-import { Button, Typography } from '@mui/material';
+import { Button, CircularProgress, Typography } from '@mui/material';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import theme from '../../theme/Theme';
 import font from '../../theme/Font';
-
+import { Box } from '@mui/system';
 interface GPTButtonProps {
   onClick: () => void;
+  isLoading: boolean
 }
 
-const AIButton: React.FC<GPTButtonProps> = ({ onClick }) => {
+const AIButton: React.FC<GPTButtonProps> = ({ onClick, isLoading }) => {
   return (
     <Button
       onClick={onClick}
@@ -29,8 +30,15 @@ const AIButton: React.FC<GPTButtonProps> = ({ onClick }) => {
         },
       }}
     >
-      <AutoAwesomeIcon/>
-      <Typography fontFamily={font.extrabold}>회고록 만들기</Typography>
+      <AutoAwesomeIcon />
+      <Box>
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          <Typography fontFamily={font.extrabold}>회고록 만들기</Typography>
+        )}
+      </Box>
+
     </Button>
   );
 };
