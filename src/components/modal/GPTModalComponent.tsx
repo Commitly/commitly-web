@@ -12,7 +12,7 @@ import ModalS from './GPTModalComponent.style';
 import { CommitResponseType } from '../../types/commit/CommitResponseType';
 import GptListItem from '../item/GptListItem';
 import { GptResponseType } from '../../types/gpt/GptResponseType';
-
+import Divider, { dividerClasses } from '@mui/material/Divider';
 
 function GPTModalComponent(day: Day) {
     const [commitMessages, setCommitMessages] = useState<CommitResponseType[]>([]); // Change to a list of strings
@@ -126,7 +126,7 @@ function GPTModalComponent(day: Day) {
                 transform: 'translate(-50%, -50%)',
             }}
         >
-            <Box sx={{ flexDirection: 'column', flexGrow: 3 }}>
+            <Box sx={{ flexDirection: 'column', flexGrow: 2.4 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <Typography
                         fontFamily={font.bold}
@@ -145,8 +145,8 @@ function GPTModalComponent(day: Day) {
                     </Box>
                 </Box>
             </Box>
-
-            <Box sx={{ flexGrow: 1.5 }}>
+            <Divider orientation="vertical" flexItem  sx={{marginRight:10}}/>
+            <Box sx={{ flexGrow: 2 }}>
                 <ModalS.container>
                     {isCommitLoading ? (
                         <Box
