@@ -186,7 +186,14 @@ function GPTModalComponent(day: Day) {
                         <CircularProgress />
                     </Box>
                 ) : (
-                    <Box sx={{ width: '100%' }}>
+                    <Box sx={{
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flexGrow: 1
+
+                    }}>
                         {commitMessages.length === 0 ? (
                             <Typography
                                 fontFamily={font.bold}
@@ -204,7 +211,7 @@ function GPTModalComponent(day: Day) {
             </Box>
         </Box>
     );
-    
+
 }
 
 export default GPTModalComponent;
