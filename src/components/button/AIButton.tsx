@@ -1,6 +1,8 @@
 import React from 'react';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import theme from '../../theme/Theme';
+import font from '../../theme/Font';
 
 interface GPTButtonProps {
   onClick: () => void;
@@ -28,7 +30,7 @@ const AIButton: React.FC<GPTButtonProps> = ({ onClick }) => {
       }}
     >
       <AutoAwesomeIcon/>
-      GPT
+      <Typography fontFamily={font.extrabold}>회고록 만들기</Typography>
     </Button>
   );
 };

@@ -41,7 +41,7 @@ function GPTModalComponent(day: Day) {
                 }
             })
                 .then(response => {
-                    console.log(response);
+                    console.log('요청 성공:', response);
                     requestGptToServer();
 
                 })
@@ -64,6 +64,7 @@ function GPTModalComponent(day: Day) {
                 }
             })
                 .then(response => {
+                    console.log('요청이 간거 맞음?:', response);
                     const messages = response.data.data.map((item: { response: string, responseDate: string }) => {
                         return {
                             response: item.response,
@@ -74,11 +75,16 @@ function GPTModalComponent(day: Day) {
                     setGptIsLoaded(false); // Set loading to false after receiving data
                 })
                 .catch(error => {
+                    console.log('에러', error.response);
+                    if (error.response?.status === 429) { // 오타 수정: stauts -> status
+                        alert('요청이 너무 많습니다. 잠시 후 다시 시도해주세요.');
+                    }
                     console.error('요청 실패:', error);
                     setGptIsLoaded(false); // Ensure loading state is set to false on error too
                 });
         } catch (error) {
             console.error('Request error:', error);
+            alert('요청 실패');
             setGptIsLoaded(false);
         }
     }
@@ -150,7 +156,7 @@ function GPTModalComponent(day: Day) {
                         <CircularProgress />
                     ) : (
                         <Box>
-                            <Box sx={{height: 20}}></Box>
+                            <Box sx={{ height: 20 }}></Box>
                             <GptListItem item={gptMessages} />
                         </Box>
 

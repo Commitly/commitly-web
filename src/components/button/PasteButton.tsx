@@ -22,7 +22,10 @@ const PasteButton: React.FC<CommitMessageInterface> = ({ message }) => {
   return (
     <Box sx={{ width: 100, marginLeft: 3 }}>
       {copied ? (
-        <CheckIcon />
+        <Box sx={{ marginLeft: 1 }}>
+          <CheckIcon />
+        </Box>
+
       ) : (
         <IconButton onClick={() => pasteButtonClick(message)}>
           <ContentCopyIcon />

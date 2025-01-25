@@ -30,7 +30,6 @@ export default function GptListItem({ item }: { item: GptResponseType[] }) {
                         </Avatar>
                     </ListItemAvatar>
                     <ListItemText sx={{width: 1000}} primary={item.response} secondary={item.responseDate} />
-
                     <PasteButton message={item.response} />
                 </ListItem>
             ))}
