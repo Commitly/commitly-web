@@ -58,7 +58,6 @@ function CalendarPage() {
         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
       >
         <GPTModalComponent date={oneDayPlus(value)} />
-
       </Modal>
     </Box>
   )

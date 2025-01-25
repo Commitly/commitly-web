@@ -38,12 +38,12 @@ axiosInstance.interceptors.response.use(
 
       try {
         // Refresh Token으로 새 Access Token 발급 요청
-        const { data } = await axios.post(`${api_key}/auth/refresh`, {
+        const { data } = await axios.post(`${api_key}login/refresh`, {
           refreshToken,
         });
 
         // 새 Access Token 저장
-        localStorage.setItem('accessToken', data);
+        localStorage.setItem('accessToken', data.data);
         console.log('새 Access Token 발급 성공:', data);
 
         // 원래 요청 재시도
@@ -52,7 +52,7 @@ axiosInstance.interceptors.response.use(
       } catch (refreshError) {
         console.error('Refresh Token도 만료됨. 로그인 페이지로 이동합니다.');
         localStorage.clear();
-        window.location.href = '/';
+        // window.location.href = '/';
         return Promise.reject(refreshError);
       }
     }
