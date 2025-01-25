@@ -13,6 +13,8 @@ import { CommitResponseType } from '../../types/commit/CommitResponseType';
 import GptListItem from '../item/GptListItem';
 import { GptResponseType } from '../../types/gpt/GptResponseType';
 import Divider, { dividerClasses } from '@mui/material/Divider';
+import Tooltip from '@mui/material/Tooltip';
+import InfoIcon from '@mui/icons-material/Info';
 
 function GPTModalComponent(day: Day) {
     const [commitMessages, setCommitMessages] = useState<CommitResponseType[]>([]); // Change to a list of strings
@@ -156,6 +158,10 @@ function GPTModalComponent(day: Day) {
                         onClick={handleClick}
                         isLoading={isGptLoading}
                     />
+                    <Box sx={{width: 20}}></Box>
+                    <Tooltip  title="리포지토리의 컨트리뷰터가 아니면 커밋이 안뜰수 있습니다." placement="top">
+                        <InfoIcon color='disabled' ></InfoIcon>
+                    </Tooltip>
                 </Box>
 
                 <Box sx={{ flexGrow: 1, overflowY: 'auto' }}>
@@ -196,11 +202,10 @@ function GPTModalComponent(day: Day) {
                 ) : (
                     <Box sx={{
                         width: '100%',
-
-
                     }}>
                         {commitMessages.length === 0 ? (
                             <Box sx={{
+                                width: '100%',
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
