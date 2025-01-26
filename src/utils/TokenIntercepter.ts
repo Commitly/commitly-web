@@ -27,6 +27,9 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
+    if(error.response?.status === 429){
+      alert("DDoS 멈춰!");
+    }
     if (error.response?.status === 401) {
       console.log('Access Token 만료, Refresh Token으로 재발급 시도...');
       const refreshToken = localStorage.getItem('refreshToken');
