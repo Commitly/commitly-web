@@ -6,6 +6,7 @@ import LoginCallbackPage from './pages/logincallback/LoginCallbackPage';
 import MainPage from './pages/main/MainPage';
 import TopAppBar from './components/appbar/TopAppBar';
 import CalendarComponent from './pages/calender/CalendarPage';
+import InfoPage from './pages/info/InfoPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<HomePage/>} />
         <Route path="/login/callback" element={<LoginCallbackPage/>} />
         <Route path="/main" element={<MainPage/>} />
+        <Route path='info'><InfoPage/></Route>
       </Routes>
     </Router>
   );
