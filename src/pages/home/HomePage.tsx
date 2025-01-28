@@ -10,6 +10,7 @@ import theme from '../../theme/Theme';
 import S from './HomePage.style';
 import C from '../../components/card/Card.style';
 import HomeCircle from '../../components/circle/HomeCircle';
+import OnboardingCarousel from '../../components/card/OnboardingCarousel';
 
 function HomePage() {
   const navigate = useNavigate();
@@ -30,33 +31,36 @@ function HomePage() {
   });
 
   return (
-    <Box
-      sx={{
-        position: 'relative', // 기준 컨테이너
-        width: '100vw',
-        height: '92vh', // 원하는 높이 지정
-        backgroundColor: '#f6f6f6', // 컨테이너 배경색
-      }}>
-
-      <Box>
-        <S.container>
-          <Box
-            sx={{
-              backgroundColor: theme.white,
-              borderRadius: '20px',
-              padding: '48px',
-              maxWidth: '1200px',
-              width: '90%',
-              boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.05)'
-            }}>
-            <Typography fontFamily={font.bold} fontSize={52}>나르샤, 동아리, 포트폴리오 회고록 <br />이제 <span style={{ color: theme.primary }}>딸깍</span>으로 끝내세요</Typography>
-            <Box sx={{ height: 10 }}></Box>
-            <Typography fontFamily={font.bold} fontSize={22} sx={{ color: theme.textNormal }}>기억도 안나는 날의 회고록 적기 힘들죠? 이제는 <span style={{ color: theme.black, marginTop: 2 }}>Commit</span><span style={{ color: theme.primary }}>ly</span>에게 맡기세요.</Typography>
-            <Box sx={{ height: 30 }}></Box>
-            <GitHubLoginButton onClick={handleGitHubLogin}></GitHubLoginButton>
-          </Box>
-          
-        </S.container>
+    <Box flexDirection={'column'} >
+      <Box
+        sx={{
+          position: 'relative', // 기준 컨테이너
+          width: '100vw',
+          height: '92vh', // 원하는 높이 지정
+          backgroundColor: '#f6f6f6', // 컨테이너 배경색
+        }}>
+        <Box>
+          <S.container>
+            <Box
+              sx={{
+                backgroundColor: theme.white,
+                borderRadius: '20px',
+                padding: '48px',
+                maxWidth: '1200px',
+                width: '90%',
+                boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.05)'
+              }}>
+              <Typography fontFamily={font.bold} fontSize={52}>나르샤, 동아리, 포트폴리오 회고록 <br />이제 <span style={{ color: theme.primary }}>딸깍</span>으로 끝내세요</Typography>
+              <Box sx={{ height: 10 }}></Box>
+              <Typography fontFamily={font.bold} fontSize={22} sx={{ color: theme.textNormal }}>기억도 안나는 날의 회고록 적기 힘들죠? 이제는 <span style={{ color: theme.black, marginTop: 2 }}>Commit</span><span style={{ color: theme.primary }}>ly</span>에게 맡기세요.</Typography>
+              <Box sx={{ height: 30 }}></Box>
+              <GitHubLoginButton onClick={handleGitHubLogin}></GitHubLoginButton>
+            </Box>
+          </S.container>
+        </Box>
+      </Box>
+      <Box sx={{width: '100vw', height: '100vh', backgroundColor: theme.white, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      <OnboardingCarousel></OnboardingCarousel>
       </Box>
     </Box>
 
