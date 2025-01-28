@@ -1,10 +1,11 @@
 import React from "react";
+import { Box } from "@mui/system";
 
 function InfoPage() {
   return (
-    <div>
-      <h1>Info Page</h1>
-    </div>
+    <Box>
+      
+    </Box>
   );
 }
 export default InfoPage;

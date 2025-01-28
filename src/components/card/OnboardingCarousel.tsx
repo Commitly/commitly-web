@@ -106,51 +106,52 @@ const ScrollHint = styled(Typography)`
 `;
 
 const OnboardingCarousel = () => {
-  const items = [
-    {
-      title: "간단한 사용",
-      description: "새로운 경험을 시작해보세요. 저희 서비스와 함께 더 나은 경험을 만나보세요.",
-      imageUrl: "https://blog.kakaocdn.net/dn/GSWaD/btr0gB0teLR/1W4YO2IXCHoDVcpca9HHGK/img.jpg",
-      altText: "서비스 소개 이미지"
-    },
-    {
-      title: "간편한 검색",
-      description: "원하는 정보를 쉽고 빠르게 찾아보세요. 직관적인 검색 기능으로 더 나은 사용자 경험을 제공합니다.",
-      imageUrl: "https://blog.kakaocdn.net/dn/GSWaD/btr0gB0teLR/1W4YO2IXCHoDVcpca9HHGK/img.jpg",
-      altText: "검색 기능 소개 이미지"
-    },
-    {
-      title: "실시간 업데이트",
-      description: "최신 정보를 실시간으로 확인하실 수 있습니다. 언제나 최신 소식을 놓치지 마세요.",
-      imageUrl: "https://blog.kakaocdn.net/dn/GSWaD/btr0gB0teLR/1W4YO2IXCHoDVcpca9HHGK/img.jpg",
-      altText: "실시간 업데이트 이미지"
-    },
-    {
-      title: "시작하기",
-      description: "지금 바로 시작해보세요. 새로운 경험이 여러분을 기다립니다.",
-      imageUrl: "https://blog.kakaocdn.net/dn/GSWaD/btr0gB0teLR/1W4YO2IXCHoDVcpca9HHGK/img.jpg",
-      altText: "시작하기 이미지"
-    }
-  ];
+    const items = [
+        {
+            title: "간단한 사용",
+            description: "회고록을 쓰고 싶은 날을 선택하세요",
+            imageUrl: "/img/commitly-web-two-img.png",
 
-  return (
-    <Container>
-      <ScrollContainer>
-        {items.map((item, index) => (
-          <Card key={index}>
-            <ImageWrapper>
-              <Image src={item.imageUrl} alt={item.altText} />
-            </ImageWrapper>
-            <Content>
-              <Title fontFamily={font.semibold}>{item.title}</Title>
-              <Description fontFamily={font.regular}>{item.description}</Description>
-            </Content>
-          </Card>
-        ))}
-      </ScrollContainer>
-      <ScrollHint>밑으로 스크롤하여 더 보기</ScrollHint>
-    </Container>
-  );
+            altText: "서비스 소개 이미지"
+        },
+        {
+            title: "커밋 기록",
+            description: "원하는 날의 커밋 기록을 보여줍니다.",
+            imageUrl: "/img/commitly-web-three-img.png",
+            altText: "검색 기능 소개 이미지"
+        },
+        {
+            title: "회고록 작성",
+            description: "버튼을 누르면 Commitly가 대신 회고록을 작성해줍니다.",
+            imageUrl: "/img/commitly-web-four-img.png",
+            altText: "실시간 업데이트 이미지"
+        },
+        {
+            title: "딸깍",
+            description: "복사 하고 붙여 넣으면 끝!",
+            imageUrl: "/img/commitly-web-five-img.png",
+            altText: "시작하기 이미지"
+        }
+    ];
+
+    return (
+        <Container>
+            <ScrollContainer>
+                {items.map((item, index) => (
+                    <Card key={index}>
+                        <ImageWrapper>
+                            <Image src={item.imageUrl} alt={item.altText} />
+                        </ImageWrapper>
+                        <Content>
+                            <Title fontFamily={font.semibold}>{item.title}</Title>
+                            <Description fontFamily={font.regular}>{item.description}</Description>
+                        </Content>
+                    </Card>
+                ))}
+            </ScrollContainer>
+            <ScrollHint>밑으로 스크롤하여 더 보기</ScrollHint>
+        </Container>
+    );
 };
 
 export default OnboardingCarousel;

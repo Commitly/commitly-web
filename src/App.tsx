@@ -16,7 +16,7 @@ function App() {
         <Route path="/" element={<HomePage/>} />
         <Route path="/login/callback" element={<LoginCallbackPage/>} />
         <Route path="/main" element={<MainPage/>} />
-        <Route path='info'><InfoPage/></Route>
+        <Route path='info' element={<InfoPage/>}></Route>
       </Routes>
     </Router>
   );
