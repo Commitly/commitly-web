@@ -10,6 +10,8 @@ import {
   Stack
 } from '@mui/material';
 import styled from 'styled-components';
+import font from '../../theme/Font';
+
 
 const ReviewsContainer = styled(Box)`
   padding: 60px 40px;
@@ -59,33 +61,6 @@ const reviews = [
     review: "나르샤 회고록이 3개월동안 밀려서 아직 아무것도 못적었는데 Commitly 덕분에 해결됐어요!",
     verifiedPurchase: true
   },
-//   {
-//     id: 2,
-//     userName: "이준호",
-//     userImage: "/api/placeholder/40/40",
-//     rating: 4,
-//     date: "2024.01.20",
-//     review: "전반적으로 만족스럽습니다. 업데이트가 자주 이루어져서 좋아요. 몇 가지 개선사항이 있다면 더 좋을 것 같네요.",
-//     verifiedPurchase: true
-//   },
-//   {
-//     id: 3,
-//     userName: "박민지",
-//     userImage: "/api/placeholder/40/40",
-//     rating: 5,
-//     date: "2024.01.25",
-//     review: "고객 서비스가 정말 훌륭해요. 문의사항에 대해 신속하고 친절하게 응답해주셔서 감사합니다.",
-//     verifiedPurchase: false
-//   },
-//   {
-//     id: 4,
-//     userName: "최현우",
-//     userImage: "/api/placeholder/40/40",
-//     rating: 5,
-//     date: "2024.01.28",
-//     review: "디자인이 너무 깔끔하고 좋네요. 특히 다크모드 지원이 마음에 듭니다. 앱의 성능도 매우 안정적이에요.",
-//     verifiedPurchase: true
-//   }
 ];
 
 const UserReviews = () => {
@@ -97,10 +72,11 @@ const UserReviews = () => {
           color: '#333',
           mb: 2,
           fontSize: '2.5rem',
+          fontFamily: font.bold
         }}>
           사용자 리뷰
         </Typography>
-        <Typography variant="h6" sx={{ color: '#777' }}>
+        <Typography fontFamily={font.regular} variant="h6" sx={{ color: '#777' }}>
           실제 사용자들의 생생한 후기를 확인해보세요
         </Typography>
       </Box>
@@ -117,19 +93,11 @@ const UserReviews = () => {
                 />
                 <UserDetails>
                   <Stack direction="row" alignItems="center" spacing={1}>
-                    <Typography variant="subtitle1" sx={{ fontWeight: 600, color: '#333' }}>
+                    <Typography variant="subtitle1" fontFamily={font.semibold} sx={{ fontWeight: 600, color: '#333' }}>
                       {review.userName}
                     </Typography>
-                    {review.verifiedPurchase && (
-                      <Chip
-                        label="구매 확인"
-                        size="small"
-                        color="primary"
-                        sx={{ height: 20 }}
-                      />
-                    )}
                   </Stack>
-                  <Typography variant="caption" color="text.secondary">
+                  <Typography fontFamily={font.regular} variant="caption" color="text.secondary">
                     {review.date}
                   </Typography>
                 </UserDetails>
@@ -149,6 +117,7 @@ const UserReviews = () => {
                   mb: 2,
                   flex: 1
                 }}
+                fontFamily={font.regular}
               >
                 {review.review}
               </Typography>
