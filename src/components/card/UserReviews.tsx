@@ -16,7 +16,7 @@ import font from '../../theme/Font';
 const ReviewsContainer = styled(Box)`
   padding: 60px 40px;
   background-color: #f4f6f9;
-  min-height: 100vh;
+  min-height: 80vh;
 `;
 
 const ReviewsGrid = styled(Box)`
