@@ -12,6 +12,7 @@ const theme = {
     textImportant: '#0000FF',
     textNormal: '#4a4f55',
     textMuted: '#6c757d',
+    textDisabled: '#adb5bd',
 }
 
 export default theme;

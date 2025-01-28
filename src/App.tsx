@@ -5,8 +5,8 @@ import HomePage from './pages/home/HomePage';
 import LoginCallbackPage from './pages/logincallback/LoginCallbackPage';
 import MainPage from './pages/main/MainPage';
 import TopAppBar from './components/appbar/TopAppBar';
-import CalendarComponent from './pages/calender/CalendarPage';
 import InfoPage from './pages/info/InfoPage';
+import BottomBar from './components/appbar/BottomBar';
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
         <Route path="/main" element={<MainPage/>} />
         <Route path='info' element={<InfoPage/>}></Route>
       </Routes>
+      <BottomBar/>
     </Router>
   );
 }
