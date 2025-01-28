@@ -11,13 +11,13 @@ export default function LoginCallbackPage() {
     useEffect(() => {
         // 현재 URL에서 code 파라미터 추출
         let code = new URLSearchParams(window.location.search).get('code');
-        console.log('code:', code);
+        // console.log('code:', code);
 
         if (code && !isRequestSent) { // code가 존재하고 요청을 아직 보내지 않은 경우
             setIsRequestSent(true); // 요청 보냈다고 상태 업데이트
             axiosInstance.get(`/login/oauth2/code/github?code=${code}`)
                 .then(response => {
-                    console.log('로그인 성공:', response.data);
+                    // console.log('로그인 성공:', response.data);
                 
                     // JWT 토큰을 받아서 로컬 스토리지에 저장하고 메인 페이지로 이동
                     localStorage.setItem('accessToken', response.data.data.accessToken);

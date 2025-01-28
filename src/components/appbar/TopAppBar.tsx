@@ -17,7 +17,7 @@ export default function TopAppBar() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const handleGitHubLogin = () => {
-    console.log('GitHub 로그인 버튼이 클릭되었습니다!');
+    // console.log('GitHub 로그인 버튼이 클릭되었습니다!');
     // GitHub OAuth Redirect 로직 추가
     window.location.href = 'https://github.com/login/oauth/authorize?client_id=Ov23li0fSA3TMwjXKF6b';
   };
@@ -26,12 +26,12 @@ export default function TopAppBar() {
   useEffect(() => {
     const accesstoken = localStorage.getItem('accessToken');
     setAccessToken(accesstoken);
-    console.log('토크놑큰', accessToken);
+    // console.log('토크놑큰', accessToken);
 });
   useEffect(() => {
     axiosInstance.get('/user/info')  // axiosInstance 사용
       .then(response => {
-        console.log('response:', response);
+        // console.log('response:', response);
         setUser(response.data.data)
       })
       .catch(error => {

@@ -42,7 +42,7 @@ function GPTModalComponent(day: Day) {
             })
                 .then(response => {
 
-                    console.log('요청 성공:', response);
+                    // console.log('요청 성공:', response);
 
                     if (response.data.status === 404) {
                         alert("해당 날짜에 커밋이 없습니다.");

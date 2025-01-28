@@ -14,7 +14,7 @@ import HomeCircle from '../../components/circle/HomeCircle';
 function HomePage() {
   const navigate = useNavigate();
   const handleGitHubLogin = () => {
-    console.log('GitHub 로그인 버튼이 클릭되었습니다!');
+    // console.log('GitHub 로그인 버튼이 클릭되었습니다!');
     // GitHub OAuth Redirect 로직 추가
     window.location.href = 'https://github.com/login/oauth/authorize?client_id=Ov23li0fSA3TMwjXKF6b';
   };
