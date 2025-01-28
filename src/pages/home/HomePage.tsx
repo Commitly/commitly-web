@@ -8,9 +8,8 @@ import { Typography } from '@mui/material';
 import font from '../../theme/Font';
 import theme from '../../theme/Theme';
 import S from './HomePage.style';
-import C from '../../components/card/Card.style';
-import HomeCircle from '../../components/circle/HomeCircle';
 import OnboardingCarousel from '../../components/card/OnboardingCarousel';
+import UserReviews from '../../components/card/UserReviews';
 
 function HomePage() {
   const navigate = useNavigate();
@@ -59,8 +58,11 @@ function HomePage() {
           </S.container>
         </Box>
       </Box>
-      <Box sx={{width: '100vw', height: '100vh', backgroundColor: theme.white, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      <Box sx={{width: '100vw', height: '120vh', backgroundColor: theme.white, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
       <OnboardingCarousel></OnboardingCarousel>
+      </Box>
+      <Box>
+      <UserReviews></UserReviews>
       </Box>
     </Box>
 
