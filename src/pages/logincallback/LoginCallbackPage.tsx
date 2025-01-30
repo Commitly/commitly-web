@@ -22,6 +22,7 @@ export default function LoginCallbackPage() {
                     // JWT 토큰을 받아서 로컬 스토리지에 저장하고 메인 페이지로 이동
                     localStorage.setItem('accessToken', response.data.data.accessToken);
                     localStorage.setItem('refreshToken', response.data.data.accessToken);
+                    console.log('로그인을 했음', response.data);
                     navigate('/main');
                 })
                 .catch(error => {
