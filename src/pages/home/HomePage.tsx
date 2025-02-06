@@ -49,7 +49,7 @@ function HomePage() {
                 width: '90%',
                 boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.05)'
               }}>
-              <Typography fontFamily={font.bold} fontSize={52}>나르샤, 동아리, 포트폴리오 회고록 <br />이제 <span style={{ color: theme.primary }}>딸깍</span>으로 끝내세요</Typography>
+              <Typography fontFamily={font.bold} fontSize={52}>프로젝트, 동아리, 포트폴리오 회고록 <br />이제 <span style={{ color: theme.primary }}>딸깍</span>으로 끝내세요</Typography>
               <Box sx={{ height: 10 }}></Box>
               <Typography fontFamily={font.bold} fontSize={22} sx={{ color: theme.textNormal }}>기억도 안나는 날의 회고록 적기 힘들죠? 이제는 <span style={{ color: theme.black, marginTop: 2 }}>Commit</span><span style={{ color: theme.primary }}>ly</span>에게 맡기세요.</Typography>
               <Box sx={{ height: 30 }}></Box>

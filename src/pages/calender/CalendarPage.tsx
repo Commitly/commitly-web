@@ -45,6 +45,7 @@ function CalendarPage() {
         formatDay={(locale, date) => date.toLocaleString('en', { day: 'numeric' })}
         value={value}
         calendarType="gregory"
+        
         minDetail="month" // 상단 네비게이션에서 '월' 단위만 보이게 설정
         maxDetail="month" // 상단 네비게이션에서 '월' 단위만 보이게 설정
       className={'custom-calendar'}
