@@ -16,6 +16,11 @@
     font-family: 'Pretendard-SemiBold';
 }
 
+.highlight-text {
+    color: #3662ff!important; /* 원하는 색상으로 변경 가능 */
+    font-weight: bold; /* 선택 사항: 글자를 굵게 */
+    text-decoration: underline;
+  }
 
 .custom-calendar .react-calendar__tile {
     color: var(--textNormal);
