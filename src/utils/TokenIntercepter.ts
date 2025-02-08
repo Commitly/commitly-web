@@ -27,6 +27,9 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
+    if(localStorage.getItem('accessToken') === null){
+      return
+    }
     if(error.response?.status === 429){
       alert("DDoS 멈춰!");
     }
@@ -35,6 +38,7 @@ axiosInstance.interceptors.response.use(
       const refreshToken = localStorage.getItem('refreshToken');
       if (refreshToken == null) {
         console.error('Refresh Token 없음. 로그인 페이지로 이동합니다.');
+        localStorage.clear();
         window.location.href = '/';
         return Promise.reject(error);
       }
