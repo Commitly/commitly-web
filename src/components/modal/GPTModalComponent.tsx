@@ -15,12 +15,25 @@ import { GptResponseType } from '../../types/gpt/GptResponseType';
 import Divider, { dividerClasses } from '@mui/material/Divider';
 import Tooltip from '@mui/material/Tooltip';
 import InfoIcon from '@mui/icons-material/Info';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 function GPTModalComponent(day: Day) {
     const [commitMessages, setCommitMessages] = useState<CommitResponseType[]>([]); // Change to a list of strings
+    const [commitTag, setCommitTag] = useState<string[]>([]);
     const [isCommitLoading, setCommitIsLoaded] = useState<boolean>(true);
     const [isGptLoading, setGptIsLoaded] = useState<boolean>(true);
     const [gptMessages, setGptMessages] = React.useState<GptResponseType[]>([]);
+
+
+    const [selectTag, setSelectTag] = React.useState("ALL");
+
+    const handleChange = (event: SelectChangeEvent) => {
+        setSelectTag(event.target.value);
+    };
+
 
     // useEffect(() => {
     //     console.log(`gpt로딩중임?? ${isGptLoading}`);
@@ -30,14 +43,13 @@ function GPTModalComponent(day: Day) {
         requestGptToServer();
     }, []);
 
-
-
     const handleClick = () => {
         setGptIsLoaded(true);
         try {
             axiosInstance.get('/github/gpt/make', {
                 params: {
-                    date: day.date.toISOString().split('T')[0]
+                    date: day.date.toISOString().split('T')[0],
+                    repositoryName: selectTag
                 }
             })
                 .then(response => {
@@ -65,10 +77,10 @@ function GPTModalComponent(day: Day) {
     const requestGptToServer = async () => {
         setGptIsLoaded(true); // 요청 시작 전 로딩 상태 설정
         try {
-
             const response = await axiosInstance.get('/github/gpt/get', {
                 params: {
-                    date: day.date.toISOString().split('T')[0]
+                    date: day.date.toISOString().split('T')[0],
+                    
                 }
             });
 
@@ -107,6 +119,7 @@ function GPTModalComponent(day: Day) {
                     });
 
                     setCommitMessages(commitData); // Set the state with the mapped data
+                    setCommitTag(["ALL",...response.data.tag]);
                     setCommitIsLoaded(false); // Set loading to false after receiving data
                 })
                 .catch(error => {
@@ -158,10 +171,27 @@ function GPTModalComponent(day: Day) {
                         onClick={handleClick}
                         isLoading={isGptLoading}
                     />
-                    <Box sx={{width: 20}}></Box>
-                    <Tooltip  title="리포지토리의 컨트리뷰터가 아니면 커밋이 안뜰수 있습니다." placement="top">
+                    <Box sx={{ width: 20 }}></Box>
+                    <Tooltip title="리포지토리의 컨트리뷰터가 아니면 커밋이 안뜰수 있습니다." placement="top">
                         <InfoIcon color='disabled' ></InfoIcon>
                     </Tooltip>
+
+                    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                        <InputLabel id="demo-select-small-label">커스텀</InputLabel>
+                        <Select
+                            labelId="demo-select-small-label"
+                            id="demo-select-small"
+                            value={selectTag}
+                            label="커스텀"
+                            onChange={handleChange}
+                        >
+                            {commitTag.map((tag) => (
+                                <MenuItem key={tag} value={tag}>
+                                    {tag}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
                 </Box>
 
                 <Box sx={{ flexGrow: 1, overflowY: 'auto' }}>
