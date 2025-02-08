@@ -18,16 +18,16 @@ function HomePage() {
     // GitHub OAuth Redirect 로직 추가
     window.location.href = 'https://github.com/login/oauth/authorize?client_id=Ov23li0fSA3TMwjXKF6b';
   };
-  useEffect(() => {
-    axiosInstance.get('/user/info')  // axiosInstance 사용
-      .then(response => {
+  // useEffect(() => {
+  //   axiosInstance.get('/user/info')  // axiosInstance 사용
+  //     .then(response => {
 
-        navigate('/main');
-      })
-      .catch(error => {
-        console.error('요청 실패:', error);
-      });
-  });
+  //       navigate('/main');
+  //     })
+  //     .catch(error => {
+  //       console.error('요청 실패:', error);
+  //     });
+  // });
 
   return (
     <Box flexDirection={'column'} >
