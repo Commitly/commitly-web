@@ -33,7 +33,7 @@ axiosInstance.interceptors.response.use(
     if (error.response?.status === 401) {
       // console.log('Access Token 만료, Refresh Token으로 재발급 시도...');
       const refreshToken = localStorage.getItem('refreshToken');
-      if (!refreshToken) {
+      if (refreshToken == null) {
         console.error('Refresh Token 없음. 로그인 페이지로 이동합니다.');
         window.location.href = '/';
         return Promise.reject(error);
