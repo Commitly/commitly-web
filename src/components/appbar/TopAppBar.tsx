@@ -13,9 +13,14 @@ import AppBarUser from '../profile/AppBarUser';
 import { useNavigate } from 'react-router-dom';
 import theme from '../../theme/Theme';
 
+
 export default function TopAppBar() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
+  
+  //유저메뉴
+  
+
   const handleGitHubLogin = () => {
     // console.log('GitHub 로그인 버튼이 클릭되었습니다!');
     // GitHub OAuth Redirect 로직 추가
