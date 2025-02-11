@@ -41,7 +41,6 @@ export default function TopAppBar() {
       })
       .catch(error => {
         console.log('앱바에서 보내기')
-        navigate('/');
       });
   }, [accessToken]);
 
