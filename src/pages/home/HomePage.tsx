@@ -62,7 +62,7 @@ function HomePage() {
       <OnboardingCarousel></OnboardingCarousel>
       </Box>
       <Box>
-      <UserReviews></UserReviews>
+      {/* <UserReviews></UserReviews> */}
       </Box>
     </Box>
 
