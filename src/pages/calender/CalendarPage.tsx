@@ -8,6 +8,7 @@ import './CustomCalendar.css';
 import { List } from '@mui/material';
 import axiosInstance from '../../utils/TokenIntercepter';
 import axios from 'axios';
+import { get } from 'http';
 
 const style = {
   position: 'absolute',
@@ -28,13 +29,15 @@ function CalendarPage() {
   const [value, onChange] = useState(new Date());
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {setOpen(false)
+    getReto();
+  };
   const oneDayPlus = (date: Date) => {
     const newDate = new Date(date);
     newDate.setDate(date.getDate() + 1);
     return newDate;
   }
-  useEffect(() => {
+  const getReto = () => {
     axiosInstance.get('/reto/get')
       .then((response) => {
         const updatedMarkDates = response.data.map((item: any) => {
@@ -48,8 +51,12 @@ function CalendarPage() {
       .catch((error) => {
         console.log(error);
       });
+  }
+  useEffect(() => {
+    getReto();
   }, []);
 
+  
 
   const onClickDay = (value: Date, event: React.MouseEvent) => {
     onChange(value);  // 날짜 값을 변경
@@ -63,6 +70,9 @@ function CalendarPage() {
         formatDay={(locale, date) => date.toLocaleString('en', { day: 'numeric' })}
         value={value}
         calendarType="gregory"
+        onActiveStartDateChange={({ activeStartDate, view }) => { 
+          getReto();
+        }}
         tileClassName={({ date }) => {
           const formattedDate = date.toISOString().split("T")[0]; // YYYY-MM-DD 형식
           return markDate.includes(formattedDate) ? "highlight-text" : "";
