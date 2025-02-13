@@ -15,7 +15,10 @@ const Container = styled(Box)`
 function BottomBar(){
     return(
         <Container>
-            <Typography color={theme.textDisabled} fontFamily={font.semibold}>
+            <Typography sx={{cursor: "pointer"}} color={theme.textDisabled} fontFamily={font.semibold} onClick={()=>{
+                 window.open("mailto:leegeh1213@gmail.com"); 
+            }
+                }>
                 문의사항 : leegeh1213@gmail.com
             </Typography>
         </Container>
