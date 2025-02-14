@@ -18,7 +18,7 @@ function LoginButton({ onClick }: { onClick: () => void }) {
                 },
             }}
         >
-            로그인
+            로그인
         </Button>
     )
 }
