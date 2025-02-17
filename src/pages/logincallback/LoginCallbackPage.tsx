@@ -26,6 +26,7 @@ export default function LoginCallbackPage() {
                     navigate('/main');
                 })
                 .catch(error => {
+                    alert("서버에 문제가 생겼습니다. 죄송합니다.")
                     console.error('로그인 실패:', error.response?.data || error.message);
                     // 요청 상태를 초기화 (필요한 경우)
                     setIsRequestSent(false);
