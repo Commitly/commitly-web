@@ -32,6 +32,7 @@ export default function LoginCallbackPage() {
                     setIsRequestSent(false);
                 });
         } else if (!code) {
+            alert("서버에 문제가 생겼습니다. 죄송합니다.")
             console.error('GitHub에서 코드가 반환되지 않았습니다.');
         }
     }, []); // isRequestSent와 navigate를 의존성 배열에 추가
