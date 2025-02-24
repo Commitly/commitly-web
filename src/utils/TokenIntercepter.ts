@@ -10,7 +10,6 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('accessToken'); // 로컬 스토리지에서 액세스 토큰 가져오기
-    // console.log('accessToken:', accessToken);
     // /login/oauth2/code/github 경로 제외하고 Authorization 헤더 추가
     if (accessToken && !config.url?.includes('/login/oauth2/code/github') && !config.url?.includes('/login/refresh')) {
       config.headers['Authorization'] = accessToken;
@@ -34,7 +33,6 @@ axiosInstance.interceptors.response.use(
       alert("DDoS 멈춰!");
     }
     if (error.response?.status === 401) {
-      // console.log('Access Token 만료, Refresh Token으로 재발급 시도...');
       const refreshToken = localStorage.getItem('refreshToken');
       if (refreshToken == null) {
         console.error('Refresh Token 없음. 로그인 페이지로 이동합니다.');
@@ -51,7 +49,7 @@ axiosInstance.interceptors.response.use(
 
         // 새 Access Token 저장
         localStorage.setItem('accessToken', data.data);
-        // console.log('새 Access Token 발급 성공:', data);
+
 
         // 원래 요청 재시도
         error.config.headers['Authorization'] = data.accessToken;

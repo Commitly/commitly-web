@@ -53,9 +53,6 @@ function GPTModalComponent(day: Day) {
                 }
             })
                 .then(response => {
-
-                    // console.log('요청 성공:', response);
-
                     if (response.data.status === 404) {
                         alert("해당 날짜에 커밋이 없습니다.");
                     }
@@ -80,7 +77,7 @@ function GPTModalComponent(day: Day) {
             const response = await axiosInstance.get('/github/gpt/get', {
                 params: {
                     date: day.date.toISOString().split('T')[0],
-                    
+
                 }
             });
 
@@ -119,7 +116,7 @@ function GPTModalComponent(day: Day) {
                     });
 
                     setCommitMessages(commitData); // Set the state with the mapped data
-                    setCommitTag(["ALL",...response.data.tag]);
+                    setCommitTag(["ALL", ...response.data.tag]);
                     setCommitIsLoaded(false); // Set loading to false after receiving data
                 })
                 .catch(error => {
