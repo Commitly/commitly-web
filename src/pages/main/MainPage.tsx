@@ -1,7 +1,5 @@
 // MainPage.tsx
 import React, { useEffect, useState } from "react";
-import axiosInstance from "../../utils/TokenIntercepter";
-import { User } from "../../types/auth/User";
 import CalendarComponent from "../calender/CalendarPage";
 import { Box } from "@mui/system";
 import MainPageS from "./MainPage.style";

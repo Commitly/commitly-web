@@ -14,7 +14,6 @@ axiosInstance.interceptors.request.use(
     if (accessToken && !config.url?.includes('/login/oauth2/code/github') && !config.url?.includes('/login/refresh')) {
       config.headers['Authorization'] = accessToken;
     }
-
     return config;
   },
   (error) => {
